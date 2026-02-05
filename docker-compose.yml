@@ -1,0 +1,166 @@
+# OpenClaw RAG Infrastructure
+# Weaviate (Vector DB) + Neo4j (Graph DB)
+
+version: '3.8'
+
+services:
+  # ==========================================================================
+  # WEAVIATE - Hybrid Vector Database (Vector + BM25)
+  # ==========================================================================
+  weaviate:
+    image: semitechnologies/weaviate:1.24.1
+    container_name: openclaw-weaviate
+    restart: unless-stopped
+    ports:
+      - "8081:8080"  # Different port to avoid conflicts
+      - "50051:50051"  # gRPC
+    environment:
+      # Persistence
+      PERSISTENCE_DATA_PATH: /var/lib/weaviate
+      
+      # Modules
+      ENABLE_MODULES: 'text2vec-openai,generative-openai'
+      DEFAULT_VECTORIZER_MODULE: 'text2vec-openai'
+      OPENAI_APIKEY: ${OPENAI_API_KEY}
+      
+      # Cluster
+      CLUSTER_HOSTNAME: 'node1'
+      
+      # Performance
+      QUERY_DEFAULTS_LIMIT: 25
+      QUERY_MAXIMUM_RESULTS: 10000
+      
+      # BM25 Configuration (for hybrid search)
+      ENABLE_BM25: 'true'
+      
+    volumes:
+      - weaviate_data:/var/lib/weaviate
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8080/v1/.well-known/ready"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ==========================================================================
+  # NEO4J - Graph Database for Entity Relationships
+  # ==========================================================================
+  neo4j:
+    image: neo4j:5.16-community
+    container_name: openclaw-neo4j
+    restart: unless-stopped
+    ports:
+      - "7688:7687"  # Bolt (different port to avoid conflicts)
+      - "7475:7474"  # Browser
+    environment:
+      # Authentication
+      NEO4J_AUTH: neo4j/openclaw_password
+      
+      # Plugins
+      NEO4J_PLUGINS: '["apoc"]'
+      
+      # Memory
+      NEO4J_server_memory_heap_initial__size: 512m
+      NEO4J_server_memory_heap_max__size: 1G
+      NEO4J_server_memory_pagecache_size: 512m
+      
+      # Performance
+      NEO4J_dbms_security_procedures_unrestricted: apoc.*
+      
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+    healthcheck:
+      test: ["CMD", "cypher-shell", "-u", "neo4j", "-p", "openclaw_password", "RETURN 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ==========================================================================
+  # REDIS - Job Queue for Long-Running Tasks (12h research)
+  # ==========================================================================
+  redis:
+    image: redis:7-alpine
+    container_name: openclaw-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # ==========================================================================
+  # DOCLING - Advanced OCR for Legal Documents
+  # ==========================================================================
+  docling:
+    image: ds4sd/docling-serve:latest
+    container_name: openclaw-docling
+    restart: unless-stopped
+    ports:
+      - "5001:5001"
+    environment:
+      # Use local models (no API key needed)
+      USE_GPU: false
+      MAX_PAGES: 1000
+    volumes:
+      - docling_cache:/root/.cache/docling
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
+      interval: 30s
+      timeout: 15s
+      retries: 3
+
+  # ==========================================================================
+  # RAG SERVICE - FastAPI Backend
+  # ==========================================================================
+  rag-service:
+    build:
+      context: ./rag-service
+      dockerfile: Dockerfile
+    container_name: openclaw-rag
+    restart: unless-stopped
+    ports:
+      - "3002:3002"
+    environment:
+      # Weaviate
+      WEAVIATE_URL: http://weaviate:8080
+      
+      # Neo4j
+      NEO4J_URI: bolt://neo4j:7687
+      NEO4J_USER: neo4j
+      NEO4J_PASS: openclaw_password
+      
+      # Embeddings
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      EMBEDDING_MODEL: text-embedding-3-small
+      
+    depends_on:
+      weaviate:
+        condition: service_healthy
+      neo4j:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3002/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  weaviate_data:
+    name: openclaw_weaviate_data
+  neo4j_data:
+    name: openclaw_neo4j_data
+  neo4j_logs:
+    name: openclaw_neo4j_logs
+  redis_data:
+    name: openclaw_redis_data
+  docling_cache:
+    name: openclaw_docling_cache
+
+networks:
+  default:
+    name: openclaw_network

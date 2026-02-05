@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>OpenClaw Cockpit Ultimate</title>
+  
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="OpenClaw" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <meta name="theme-color" content="#0f0f0f" />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar Navigation - 6 SECCIONES -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <span class="logo-icon">🦞</span>
+          <span class="logo-text">OpenClaw</span>
+        </div>
+        <span class="version-badge">Ultimate</span>
+      </div>
+
+      <nav class="nav-menu">
+        <!-- SECCIÓN 1: USO -->
+        <div class="nav-section">
+          <span class="nav-section-title">💼 1. USO</span>
+          <a href="#" class="nav-item active" data-tab="chat">
+            <span class="nav-icon">💬</span><span>Chat</span>
+          </a>
+          <a href="#" class="nav-item" data-tab="tasks">
+            <span class="nav-icon">📋</span><span>Tareas Actuales</span>
+          </a>
+          <a href="#" class="nav-item" data-tab="screenshots">
+            <span class="nav-icon">🖼️</span><span>Screenshots</span>
+          </a>
+          <a href="#" class="nav-item" data-tab="email">
+            <span class="nav-icon">📧</span><span>Email</span>
+          </a>
+        </div>
+
+        <!-- SECCIÓN 2: ESTADO -->
+        <div class="nav-section estado-zone">
+          <span class="nav-section-title">🔋 2. ESTADO</span>
+          <a href="#" class="nav-item" data-tab="status">
+            <span class="nav-icon">📊</span><span>Estado del Sistema</span>
+            <span class="badge status-ok" id="systemBadge">OK</span>
+          </a>
+          <a href="#" class="nav-item" data-tab="quotas">
+            <span class="nav-icon">📈</span><span>Cuotas y Uso</span>
+          </a>
+          <a href="#" class="nav-item" data-tab="sessions">
+            <span class="nav-icon">🌐</span><span>Sesiones Login</span>
+          </a>
+        </div>
+
+        <!-- SECCIÓN 3: FEED -->
+        <div class="nav-section feed-zone">
+          <span class="nav-section-title">📰 3. FEED</span>
+          <a href="#" class="nav-item" data-tab="feed">
+            <span class="nav-icon">📰</span><span>Feed Principal</span>
+            <span class="badge pulse">Live</span>
+          </a>
+          <a href="#" class="nav-item" data-tab="deliveries">
+            <span class="nav-icon">📦</span><span>Entregas</span>
+          </a>
+          <a href="#" class="nav-item" data-tab="news">
+            <span class="nav-icon">🤖</span><span>AI News</span>
+          </a>
+        </div>
+
+        <!-- SECCIÓN 4: SUPERVISIÓN -->
+        <div class="nav-section supervision-zone">
+          <span class="nav-section-title">👁️ 4. SUPERVISIÓN</span>
+          <a href="#" class="nav-item" data-tab="agents">
+            <span class="nav-icon">🤖</span><span>Agentes</span>
+          </a>
+          <a href="#" class="nav-item" data-tab="memory">
+            <span class="nav-icon">🧠</span><span>Memoria</span>
+          </a>
+          <a href="#" class="nav-item" data-tab="history">
+            <span class="nav-icon">📜</span><span>Historial</span>
+          </a>
+        </div>
+
+        <!-- SECCIÓN 5: CABINA DE MANDOS -->
+        <div class="nav-section cockpit-zone">
+          <span class="nav-section-title">🎛️ 5. CABINA</span>
+          <a href="#" class="nav-item" data-tab="config-agents">
+            <span class="nav-icon">⚙️</span><span>Config Agentes</span>
+          </a>
+          <a href="#" class="nav-item" data-tab="skills">
+            <span class="nav-icon">🛠️</span><span>Skills</span>
+          </a>
+          <a href="#" class="nav-item" data-tab="tools">
+            <span class="nav-icon">🔧</span><span>Tools & MCPs</span>
+          </a>
+          <a href="#" class="nav-item" data-tab="accounts">
+            <span class="nav-icon">🔑</span><span>Cuentas LLM</span>
+          </a>
+          <a href="#" class="nav-item" data-tab="userdata">
+            <span class="nav-icon">👤</span><span>Datos Usuario</span>
+          </a>
+          <a href="#" class="nav-item" data-tab="rag">
+            <span class="nav-icon">🔮</span><span>RAG Config</span>
+          </a>
+          <a href="#" class="nav-item" data-tab="winworker">
+            <span class="nav-icon">🖥️</span><span>Windows Worker</span>
+            <span class="badge badge-new">NEW</span>
+          </a>
+          <a href="#" class="nav-item" data-tab="settings">
+            <span class="nav-icon">⚙️</span><span>Settings</span>
+          </a>
+        </div>
+
+        <!-- SECCIÓN 6: CONECTORES EXTERNOS -->
+        <div class="nav-section connectors-zone">
+          <span class="nav-section-title">🔌 6. CONECTORES</span>
+          <a href="#" class="nav-item" data-tab="gdrive">
+            <span class="nav-icon">📁</span><span>Google Drive</span>
+          </a>
+          <a href="#" class="nav-item" data-tab="dropbox">
+            <span class="nav-icon">📦</span><span>Dropbox</span>
+          </a>
+          <a href="#" class="nav-item" data-tab="notion">
+            <span class="nav-icon">📓</span><span>Notion</span>
+          </a>
+          <a href="#" class="nav-item" data-tab="github">
+            <span class="nav-icon">🐙</span><span>GitHub</span>
+          </a>
+          <a href="#" class="nav-item" data-tab="webhooks">
+            <span class="nav-icon">🔗</span><span>Webhooks</span>
+          </a>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="gateway-status">
+          <span class="status-indicator" id="gatewayIndicator"></span>
+          <span id="gatewayText">Gateway: Checking...</span>
+        </div>
+        <div class="remote-status">
+          <span class="status-indicator offline" id="tailscaleIndicator"></span>
+          <span id="tailscaleText">Tailscale: Off</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-left">
+          <h1 class="page-title" id="pageTitle">Chat</h1>
+          <span class="breadcrumb" id="breadcrumb">USO / Chat</span>
+        </div>
+        <div class="header-right">
+          <button class="btn btn-icon glow" id="refreshBtn" title="Refrescar"><span>🔄</span></button>
+          <button class="btn btn-icon" id="tailscaleBtn" title="Tailscale"><span>🌐</span></button>
+          <div class="user-avatar" title="Diego"><span>D</span></div>
+        </div>
+      </header>
+
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <!-- SECCIÓN 1: USO -->
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+
+      <!-- Chat Tab -->
+      <section class="tab-content active" id="chatTab">
+        <div class="chat-container">
+          <div class="chat-sidebar glass">
+            <h4>🎯 Agente</h4>
+            <div class="agent-selector" id="chatAgentSelector"></div>
+            <h4>🤖 Modelo Directo</h4>
+            <div class="model-selector" id="modelSelector"></div>
+          </div>
+          <div class="chat-main glass">
+            <div class="chat-header">
+              <div class="chat-model-info">
+                <span class="chat-model-icon" id="chatIcon">🎯</span>
+                <div>
+                  <span class="chat-model-name" id="chatName">Socio</span>
+                  <span class="chat-model-status" id="chatStatus">Listo</span>
+                </div>
+              </div>
+              <button class="btn btn-sm" id="clearChat">Limpiar</button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+              <div class="chat-welcome">
+                <h2>💬 Chat OpenClaw</h2>
+                <p>Habla con <strong>Socio</strong> para coordinar todo, o con cualquier agente/modelo.</p>
+              </div>
+            </div>
+            <div class="chat-input-area">
+              <textarea id="chatInput" placeholder="Escribe tu mensaje..." rows="2"></textarea>
+              <button class="btn btn-primary btn-glow btn-send" id="sendBtn">➤</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tasks Tab -->
+      <section class="tab-content" id="tasksTab">
+        <div class="section-header">
+          <h2>📋 Tareas Actuales</h2>
+          <button class="btn btn-primary btn-glow" id="newTaskBtn">+ Nueva Tarea</button>
+        </div>
+        <div class="tasks-board">
+          <div class="task-column">
+            <h3>⏳ Pendientes</h3>
+            <div class="task-list" id="tasksPending"></div>
+          </div>
+          <div class="task-column">
+            <h3>🔄 En Progreso</h3>
+            <div class="task-list" id="tasksInProgress"></div>
+          </div>
+          <div class="task-column">
+            <h3>✅ Completadas</h3>
+            <div class="task-list" id="tasksCompleted"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Screenshots Tab -->
+      <section class="tab-content" id="screenshotsTab">
+        <div class="section-header">
+          <h2>🖼️ Galería de Screenshots</h2>
+          <span class="auto-sync">🔄 Auto-sync activo</span>
+        </div>
+        <div class="screenshots-grid" id="screenshotsGrid">
+          <div class="empty-state">
+            <span>📸</span>
+            <p>Los screenshots de los agentes aparecerán aquí automáticamente</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Email Tab -->
+      <section class="tab-content" id="emailTab">
+        <div class="section-header">
+          <h2>📧 Gmail - diegomanzurn@gmail.com</h2>
+          <button class="btn btn-primary" id="connectGmail">Conectar Gmail</button>
+        </div>
+        <div class="email-folders">
+          <button class="folder-btn active" data-folder="inbox">📥 Inbox</button>
+          <button class="folder-btn" data-folder="sent">📤 Sent</button>
+          <button class="folder-btn" data-folder="spam">🚫 Spam</button>
+          <button class="folder-btn" data-folder="all">📂 All</button>
+        </div>
+        <div class="email-list" id="emailList">
+          <div class="empty-state"><span>📧</span><p>Conecta Gmail para ver tus correos</p></div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <!-- SECCIÓN 2: ESTADO -->
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+
+      <!-- Status Tab -->
+      <section class="tab-content" id="statusTab">
+        <div class="section-header">
+          <h2>📊 Estado del Sistema</h2>
+          <span class="system-status-big" id="overallStatus">
+            <span class="status-indicator online"></span> Todo OK
+          </span>
+        </div>
+        <div class="status-grid">
+          <div class="status-card glass">
+            <div class="status-header">
+              <span class="status-icon">🦞</span>
+              <h4>OpenClaw Gateway</h4>
+            </div>
+            <div class="status-value" id="gatewayStatus">
+              <span class="status-indicator online"></span> Activo (local)
+            </div>
+            <div class="status-details">Token: b3d7b74b...71799</div>
+          </div>
+          <div class="status-card glass">
+            <div class="status-header">
+              <span class="status-icon">📱</span>
+              <h4>WhatsApp</h4>
+            </div>
+            <div class="status-value" id="whatsappStatus">
+              <span class="status-indicator online"></span> Conectado
+            </div>
+            <div class="status-details">DM: pairing | Groups: allowlist</div>
+          </div>
+          <div class="status-card glass">
+            <div class="status-header">
+              <span class="status-icon">✈️</span>
+              <h4>Telegram</h4>
+            </div>
+            <div class="status-value" id="telegramStatus">
+              <span class="status-indicator online"></span> Conectado
+            </div>
+            <div class="status-details">Bot: 8527843858:AAG...</div>
+          </div>
+          <div class="status-card glass">
+            <div class="status-header">
+              <span class="status-icon">🤖</span>
+              <h4>Agentes</h4>
+            </div>
+            <div class="status-value" id="agentsCountStatus">
+              <span id="activeAgentsCount">11</span> configurados
+            </div>
+            <div class="status-details">Max concurrente: 4 | Subagentes: 8</div>
+          </div>
+          <div class="status-card glass">
+            <div class="status-header">
+              <span class="status-icon">💾</span>
+              <h4>Backend API</h4>
+            </div>
+            <div class="status-value" id="backendStatus">
+              <span class="status-indicator offline"></span> Checking...
+            </div>
+            <div class="status-details">Puerto: 3001</div>
+          </div>
+          <div class="status-card glass">
+            <div class="status-header">
+              <span class="status-icon">🌐</span>
+              <h4>Tailscale</h4>
+            </div>
+            <div class="status-value" id="tailscaleFullStatus">
+              <span class="status-indicator offline"></span> No configurado
+            </div>
+            <div class="status-details">Para acceso remoto desde iPhone</div>
+          </div>
+        </div>
+        <div class="errors-panel glass" id="errorsPanel">
+          <h3>⚠️ Errores y Alertas</h3>
+          <div class="errors-list" id="errorsList">
+            <p class="no-errors">✅ No hay errores activos</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quotas Tab -->
+      <section class="tab-content" id="quotasTab">
+        <div class="section-header">
+          <h2>📈 Cuotas y Uso</h2>
+        </div>
+        <div class="quotas-grid" id="quotasGrid"></div>
+      </section>
+
+      <!-- Sessions Tab -->
+      <section class="tab-content" id="sessionsTab">
+        <div class="section-header">
+          <h2>🌐 Sesiones Activas</h2>
+        </div>
+        <div class="sessions-grid" id="sessionsGrid"></div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <!-- SECCIÓN 3: FEED -->
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+
+      <!-- Feed Tab -->
+      <section class="tab-content" id="feedTab">
+        <div class="section-header">
+          <h2>📰 Feed Principal</h2>
+          <div class="feed-filters">
+            <button class="filter-btn active" data-filter="all">Todo</button>
+            <button class="filter-btn" data-filter="socio">Socio Reports</button>
+            <button class="filter-btn" data-filter="agents">Agentes</button>
+          </div>
+        </div>
+        <div class="feed-info-bar glass">
+          <span>🎯 Socio reporta cada <strong>40 min</strong></span>
+          <span>Próximo reporte: <strong id="nextReportTime">--:--</strong></span>
+        </div>
+        <div class="feed-list full" id="feedList"></div>
+      </section>
+
+      <!-- Deliveries Tab -->
+      <section class="tab-content" id="deliveriesTab">
+        <div class="section-header">
+          <h2>📦 Entregas de Tareas</h2>
+        </div>
+        <div class="deliveries-list" id="deliveriesList">
+          <div class="empty-state"><span>📦</span><p>Las entregas completadas aparecerán aquí</p></div>
+        </div>
+      </section>
+
+      <!-- AI News Tab -->
+      <section class="tab-content" id="newsTab">
+        <div class="section-header">
+          <h2>🤖 AI News (Últimos 15 días)</h2>
+          <button class="btn btn-secondary" id="refreshNews">Actualizar</button>
+        </div>
+        <div class="news-sources glass">
+          <h4>Fuentes:</h4>
+          <div class="source-tags" id="newsSources">
+            <span class="source-tag">OpenAI Blog</span>
+            <span class="source-tag">Anthropic</span>
+            <span class="source-tag">Google AI</span>
+            <span class="source-tag">Hugging Face</span>
+            <span class="source-tag">AI News Chile</span>
+            <button class="btn btn-sm" id="editSources">Editar</button>
+          </div>
+        </div>
+        <div class="news-list" id="newsList">
+          <div class="empty-state"><span>📰</span><p>Cargando noticias de IA...</p></div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <!-- SECCIÓN 4: SUPERVISIÓN -->
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+
+      <!-- Agents Tab -->
+      <section class="tab-content" id="agentsTab">
+        <div class="section-header">
+          <h2>🤖 Supervisión de Agentes</h2>
+        </div>
+        <div class="agents-supervision-grid" id="agentsSupervisionGrid"></div>
+      </section>
+
+      <!-- Memory Tab -->
+      <section class="tab-content" id="memoryTab">
+        <div class="section-header">
+          <h2>🧠 Memoria de Agentes</h2>
+          <select id="memoryAgentSelect" class="select-styled"></select>
+        </div>
+        <div class="memory-grid">
+          <div class="card glass memory-layers">
+            <h3>📚 Capas de Memoria</h3>
+            <div class="layer-list" id="memoryLayers"></div>
+          </div>
+          <div class="card glass memory-graph">
+            <h3>🔮 Graph Visualization (Neo4j)</h3>
+            <div class="graph-placeholder" id="graphVis">
+              <p>Neo4j no conectado</p>
+              <button class="btn btn-sm btn-primary" id="connectNeo4jBtn">Conectar</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- History Tab -->
+      <section class="tab-content" id="historyTab">
+        <div class="section-header">
+          <h2>📜 Historial de Trabajo</h2>
+          <select id="historyAgentSelect" class="select-styled"></select>
+        </div>
+        <div class="history-list" id="historyList">
+          <div class="empty-state"><span>📜</span><p>Selecciona un agente para ver su historial</p></div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <!-- SECCIÓN 5: CABINA DE MANDOS -->
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+
+      <!-- Config Agents Tab -->
+      <section class="tab-content" id="config-agentsTab">
+        <div class="section-header">
+          <h2>⚙️ Configuración de Agentes</h2>
+          <button class="btn btn-primary btn-glow" id="newAgentBtn">+ Crear Agente</button>
+        </div>
+        <div class="agents-config-grid" id="agentsConfigGrid"></div>
+      </section>
+
+      <!-- Skills Tab -->
+      <section class="tab-content" id="skillsTab">
+        <div class="section-header">
+          <h2>🛠️ Skills</h2>
+          <button class="btn btn-primary" id="newSkillBtn">+ Agregar Skill</button>
+        </div>
+        <div class="skills-grid" id="skillsGrid"></div>
+      </section>
+
+      <!-- Tools Tab -->
+      <section class="tab-content" id="toolsTab">
+        <div class="section-header">
+          <h2>🔧 Tools & MCPs</h2>
+        </div>
+        <div class="tools-sections">
+          <div class="card glass">
+            <h3>🔌 MCP Servers</h3>
+            <div class="mcp-list" id="mcpList"></div>
+          </div>
+          <div class="card glass">
+            <h3>📦 Libraries</h3>
+            <div class="lib-list" id="libList"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Accounts Tab -->
+      <section class="tab-content" id="accountsTab">
+        <div class="section-header">
+          <h2>🔑 Cuentas LLM</h2>
+          <button class="btn btn-primary" id="addAccountBtn">+ Agregar Cuenta</button>
+        </div>
+        <div class="accounts-grid" id="accountsGrid"></div>
+      </section>
+
+      <!-- User Data Tab -->
+      <section class="tab-content" id="userdataTab">
+        <div class="section-header">
+          <h2>👤 Datos del Usuario</h2>
+          <span class="hint-inline">(Accesible por todos los agentes)</span>
+        </div>
+        <div class="userdata-grid">
+          <div class="card glass userdata-memory">
+            <h3>📝 Memoria del Usuario</h3>
+            <p class="hint">Escribe quién eres, objetivos, preferencias. Todos los agentes pueden leer esto.</p>
+            <textarea id="userMemory" placeholder="Soy Diego, abogado. Mis objetivos son..." rows="12"></textarea>
+            <button class="btn btn-primary" id="saveUserMemory">💾 Guardar</button>
+          </div>
+          <div class="card glass userdata-variables">
+            <h3>🔐 Variables (Secrets)</h3>
+            <p class="hint">API keys, passwords, tokens encriptados</p>
+            <div class="variables-list" id="variablesList"></div>
+            <button class="btn btn-secondary" id="addVariable">+ Agregar Variable</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- RAG Tab -->
+      <section class="tab-content" id="ragTab">
+        <div class="section-header">
+          <h2>🔮 RAG Configuration - Hybrid Search</h2>
+          <span class="badge badge-info">Vector + BM25 + Graph</span>
+        </div>
+        
+        <!-- Retention Policy Section -->
+        <div class="settings-section glass" style="margin-bottom: 20px;">
+          <h3>⏱️ Política de Retención Global</h3>
+          <p class="hint">Controla cuánto tiempo se guardan los datos en los RAGs</p>
+          <div class="setting-row">
+            <label>Retención de Datos</label>
+            <select id="globalRetention" class="retention-select">
+              <option value="infinite" selected>♾️ Infinita (Recomendado)</option>
+              <option value="10_days">📅 10 Días</option>
+              <option value="30_days">📅 30 Días</option>
+              <option value="3_months">📅 3 Meses</option>
+              <option value="6_months">📅 6 Meses</option>
+              <option value="1_year">📅 1 Año</option>
+            </select>
+          </div>
+          <div class="setting-row">
+            <label>Aplicar a</label>
+            <select id="retentionScope">
+              <option value="all">Todos los agentes</option>
+              <option value="socio">Solo Socio</option>
+              <option value="aboganster">Solo Aboganster</option>
+              <option value="cabezon">Solo Cabezón</option>
+              <option value="fotocopia">Solo El Fotocopia</option>
+              <option value="shared">Solo Shared (Global)</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" id="applyRetention">Aplicar Retención</button>
+        </div>
+
+        <div class="rag-grid">
+          <!-- Weaviate Vector DB -->
+          <div class="card glass">
+            <h3>🧬 Weaviate (Vector + BM25)</h3>
+            <div class="rag-status">
+              <span class="status-indicator" id="weaviateIndicator"></span>
+              <span id="weaviateStatusText">Conectando...</span>
+            </div>
+            <div class="rag-form">
+              <input type="text" placeholder="http://localhost:8081" id="weaviateUrl" value="http://localhost:8081" />
+              <button class="btn btn-primary" id="connectWeaviate">Conectar</button>
+            </div>
+            <div class="rag-stats-panel">
+              <h4>📊 Índices por Agente</h4>
+              <div class="index-list" id="weaviateIndexList">
+                <div class="index-item">
+                  <span class="index-name">OpenClaw_Shared</span>
+                  <span class="index-count">0 objetos</span>
+                  <span class="index-date">-</span>
+                </div>
+                <div class="index-item">
+                  <span class="index-name">OpenClaw_Agent_socio</span>
+                  <span class="index-count">0 objetos</span>
+                  <span class="index-date">-</span>
+                </div>
+                <div class="index-item">
+                  <span class="index-name">OpenClaw_Agent_aboganster</span>
+                  <span class="index-count">0 objetos</span>
+                  <span class="index-date">-</span>
+                </div>
+                <div class="index-item">
+                  <span class="index-name">OpenClaw_Agent_cabezon</span>
+                  <span class="index-count">0 objetos</span>
+                  <span class="index-date">-</span>
+                </div>
+              </div>
+              <div class="index-total">
+                <strong>Total:</strong> <span id="weaviateTotalObjects">0</span> objetos | 
+                <strong>Tamaño:</strong> <span id="weaviateTotalSize">0 MB</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Neo4j Graph DB -->
+          <div class="card glass">
+            <h3>🔗 Neo4j (Graph RAG)</h3>
+            <div class="rag-status">
+              <span class="status-indicator offline" id="neo4jIndicator"></span>
+              <span id="neo4jStatusText">No conectado</span>
+            </div>
+            <div class="rag-form">
+              <input type="text" placeholder="bolt://localhost:7688" id="neo4jUrl" value="bolt://localhost:7688" />
+              <input type="text" placeholder="neo4j" id="neo4jUser" value="neo4j" />
+              <input type="password" placeholder="password" id="neo4jPass" value="openclaw_password" />
+              <button class="btn btn-primary" id="connectNeo4j">Conectar</button>
+            </div>
+            <div class="rag-stats-panel">
+              <h4>🔗 Estadísticas del Grafo</h4>
+              <div class="graph-stats">
+                <div class="stat-row">
+                  <span>Total Nodos:</span>
+                  <span id="neo4jTotalNodes">0</span>
+                </div>
+                <div class="stat-row">
+                  <span>Total Relaciones:</span>
+                  <span id="neo4jTotalRelations">0</span>
+                </div>
+                <div class="stat-row">
+                  <span>Último guardado:</span>
+                  <span id="neo4jLastSaved">-</span>
+                </div>
+              </div>
+              <h5>Por Label:</h5>
+              <div class="label-list" id="neo4jLabelList">
+                <span class="label-tag">:Person (0)</span>
+                <span class="label-tag">:Concept (0)</span>
+                <span class="label-tag">:Document (0)</span>
+              </div>
+            </div>
+            <p class="hint">Extrae entidades y relaciones automáticamente de conversaciones</p>
+          </div>
+
+          <!-- Hybrid Search Config -->
+          <div class="card glass">
+            <h3>🔍 Hybrid Search Config</h3>
+            <div class="hybrid-config">
+              <div class="config-row">
+                <label>Peso Vector (Semántico)</label>
+                <input type="range" min="0" max="100" value="70" id="vectorWeight" />
+                <span id="vectorWeightValue">70%</span>
+              </div>
+              <div class="config-row">
+                <label>Peso BM25 (Keywords)</label>
+                <input type="range" min="0" max="100" value="30" id="bm25Weight" />
+                <span id="bm25WeightValue">30%</span>
+              </div>
+              <div class="config-row">
+                <label>Incluir Graph RAG</label>
+                <label class="toggle"><input type="checkbox" checked id="includeGraphRag"><span class="slider"></span></label>
+              </div>
+              <div class="config-row">
+                <label>Min Score</label>
+                <input type="number" step="0.1" min="0" max="1" value="0.5" id="minScore" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Backup History -->
+          <div class="card glass">
+            <h3>💾 Historial de Backups</h3>
+            <table class="backup-table">
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Weaviate</th>
+                  <th>Neo4j</th>
+                  <th>Tamaño</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody id="backupHistory">
+                <tr>
+                  <td>2026-02-05</td>
+                  <td>✅</td>
+                  <td>✅</td>
+                  <td>0 MB</td>
+                  <td><span class="badge badge-success">Local</span></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="backup-actions">
+              <button class="btn btn-secondary" id="manualBackup">📥 Backup Manual</button>
+              <button class="btn btn-secondary" id="uploadDrive">☁️ Subir a Drive</button>
+            </div>
+            <p class="hint">Backup automático diario a las 03:00 AM</p>
+          </div>
+
+          <!-- Chunking & Embedding Config -->
+          <div class="card glass">
+            <h3>🧩 Chunking & Embedding</h3>
+            <div class="chunking-config">
+              <div class="config-row">
+                <label>Tamaño de Chunk</label>
+                <input type="number" value="500" min="100" max="2000" id="chunkSize" />
+                <span>tokens</span>
+              </div>
+              <div class="config-row">
+                <label>Overlap</label>
+                <input type="number" value="50" min="0" max="200" id="chunkOverlap" />
+                <span>tokens</span>
+              </div>
+              <div class="config-row">
+                <label>Modelo de Embedding</label>
+                <select id="embeddingModel">
+                  <option value="text-embedding-3-small" selected>OpenAI text-embedding-3-small (1536d)</option>
+                  <option value="text-embedding-3-large">OpenAI text-embedding-3-large (3072d)</option>
+                  <option value="gemini-embedding">Gemini Embedding (768d)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Conversation Storage -->
+          <div class="card glass">
+            <h3>💬 Conversation Storage</h3>
+            <div class="conv-stats">
+              <div class="conv-stat">
+                <span class="conv-value" id="convCount">0</span>
+                <span class="conv-label">Conversaciones</span>
+              </div>
+              <div class="conv-stat">
+                <span class="conv-value" id="convSize">0 MB</span>
+                <span class="conv-label">Almacenamiento</span>
+              </div>
+              <div class="conv-stat">
+                <span class="conv-value" id="convChunks">0</span>
+                <span class="conv-label">Chunks Indexados</span>
+              </div>
+            </div>
+            <label class="toggle-row">
+              <span>Auto-indexar conversaciones</span>
+              <label class="toggle"><input type="checkbox" checked id="autoIndexConv"><span class="slider"></span></label>
+            </label>
+            <label class="toggle-row">
+              <span>Extraer entidades (Neo4j)</span>
+              <label class="toggle"><input type="checkbox" checked id="autoExtractEntities"><span class="slider"></span></label>
+            </label>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Windows Worker Tab (Autonomy Stack) -->
+      <section class="tab-content" id="winworkerTab">
+        <div class="section-header">
+          <h2>🖥️ Windows Worker - Autonomy Stack</h2>
+          <span class="system-status-big" id="winworkerOverallStatus">
+            <span class="status-indicator offline"></span> Checking...
+          </span>
+        </div>
+        
+        <!-- Status Bar -->
+        <div class="winworker-statusbar glass">
+          <div class="status-item">
+            <span class="status-icon">🔌</span>
+            <span>Worker API:</span>
+            <span class="status-indicator" id="winworkerApiIndicator"></span>
+            <span id="winworkerApiStatus">Offline</span>
+          </div>
+          <div class="status-item">
+            <span class="status-icon">👁️</span>
+            <span>Gemini Vision:</span>
+            <span class="status-indicator" id="geminiVisionIndicator"></span>
+            <span id="geminiVisionStatus">-</span>
+          </div>
+          <div class="status-item">
+            <span class="status-icon">🎭</span>
+            <span>Stealth Browser:</span>
+            <span class="status-indicator" id="stealthBrowserIndicator"></span>
+            <span id="stealthBrowserStatus">-</span>
+          </div>
+          <button class="btn btn-primary btn-sm" id="checkWinworkerStatus">🔄 Check Status</button>
+          <button class="btn btn-danger btn-sm" id="killSwitch" title="Emergency Stop">🛑 KILL</button>
+        </div>
+
+        <div class="winworker-grid">
+          <!-- Vision & Screen Analysis -->
+          <div class="card glass">
+            <h3>👁️ Gemini Vision (Screen Analysis)</h3>
+            <p class="hint">Analiza la pantalla con Gemini 2.0 Flash Vision</p>
+            
+            <div class="vision-controls">
+              <button class="btn btn-primary" id="captureScreen">📸 Capturar Pantalla</button>
+              <button class="btn btn-secondary" id="findElement">🔍 Encontrar Elemento</button>
+              <button class="btn btn-secondary" id="extractText">📝 Extraer Texto</button>
+            </div>
+            
+            <div class="form-group">
+              <label>Prompt para análisis:</label>
+              <textarea id="visionPrompt" placeholder="Describe lo que ves en la pantalla..." rows="3"></textarea>
+            </div>
+            
+            <button class="btn btn-primary btn-glow" id="analyzeScreen">🧠 Analizar Pantalla</button>
+            
+            <div class="vision-result glass" id="visionResult">
+              <p class="placeholder-text">Los resultados del análisis aparecerán aquí</p>
+            </div>
+          </div>
+
+          <!-- Desktop Automation -->
+          <div class="card glass">
+            <h3>🤖 PyAutoGUI (Desktop Automation)</h3>
+            <p class="hint">Control directo de mouse y teclado en Windows</p>
+            
+            <div class="automation-controls">
+              <h4>🖱️ Mouse</h4>
+              <div class="button-row">
+                <button class="btn btn-sm" id="mouseClick">Click</button>
+                <button class="btn btn-sm" id="mouseRightClick">Right Click</button>
+                <button class="btn btn-sm" id="mouseDoubleClick">Double Click</button>
+                <button class="btn btn-sm" id="mouseMove">Move</button>
+              </div>
+              
+              <div class="form-group inline">
+                <label>X:</label>
+                <input type="number" id="mouseX" placeholder="X" value="500" />
+                <label>Y:</label>
+                <input type="number" id="mouseY" placeholder="Y" value="300" />
+              </div>
+              
+              <h4>⌨️ Keyboard</h4>
+              <div class="form-group">
+                <label>Texto a escribir:</label>
+                <input type="text" id="typeText" placeholder="Hello world..." />
+              </div>
+              <div class="button-row">
+                <button class="btn btn-sm btn-primary" id="typeTextBtn">⌨️ Escribir</button>
+                <button class="btn btn-sm" id="pressEnter">↵ Enter</button>
+                <button class="btn btn-sm" id="pressTab">⭾ Tab</button>
+                <button class="btn btn-sm" id="pressEscape">⎋ Esc</button>
+              </div>
+              
+              <div class="form-group">
+                <label>Hotkey:</label>
+                <select id="hotkeySelect">
+                  <option value="ctrl+c">Ctrl+C (Copy)</option>
+                  <option value="ctrl+v">Ctrl+V (Paste)</option>
+                  <option value="ctrl+a">Ctrl+A (Select All)</option>
+                  <option value="ctrl+s">Ctrl+S (Save)</option>
+                  <option value="alt+tab">Alt+Tab (Switch)</option>
+                  <option value="win+d">Win+D (Desktop)</option>
+                </select>
+                <button class="btn btn-sm" id="sendHotkey">⚡ Enviar Hotkey</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stealth Browser -->
+          <div class="card glass">
+            <h3>🎭 Playwright Stealth (Anti-Detection Browser)</h3>
+            <p class="hint">Navegación web indetectable con evasión anti-bot</p>
+            
+            <div class="stealth-controls">
+              <div class="form-group">
+                <label>URL a navegar:</label>
+                <input type="url" id="stealthUrl" placeholder="https://example.com" />
+              </div>
+              
+              <div class="button-row">
+                <button class="btn btn-primary" id="stealthNavigate">🌐 Navegar</button>
+                <button class="btn btn-secondary" id="stealthScreenshot">📸 Screenshot</button>
+                <button class="btn btn-secondary" id="stealthContent">📄 Get Content</button>
+              </div>
+              
+              <h4>🔐 Login Helper</h4>
+              <div class="form-group inline">
+                <label>Usuario:</label>
+                <input type="text" id="loginUsername" placeholder="user@email.com" />
+                <label>Password:</label>
+                <input type="password" id="loginPassword" placeholder="••••••" />
+              </div>
+              <button class="btn btn-sm btn-primary" id="stealthLogin">🔓 Auto-Login</button>
+              
+              <h4>🔍 Research Mode</h4>
+              <div class="form-group">
+                <label>Query de investigación:</label>
+                <input type="text" id="researchQuery" placeholder="AI trends 2026..." />
+              </div>
+              <button class="btn btn-primary btn-glow" id="startResearch">🔬 Iniciar Investigación</button>
+              
+              <h4>📊 Estado del Browser</h4>
+              <div class="browser-status-panel" id="browserStatusPanel">
+                <p>Pages: <span id="browserPages">0</span></p>
+                <p>Current URL: <span id="browserCurrentUrl">-</span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Application Control -->
+          <div class="card glass">
+            <h3>📱 Application Control</h3>
+            <p class="hint">Lanza y controla aplicaciones de Windows</p>
+            
+            <div class="app-shortcuts">
+              <button class="btn btn-sm" id="launchNotepad" data-app="notepad.exe">📝 Notepad</button>
+              <button class="btn btn-sm" id="launchCalc" data-app="calc.exe">🔢 Calculator</button>
+              <button class="btn btn-sm" id="launchExplorer" data-app="explorer.exe">📁 Explorer</button>
+              <button class="btn btn-sm" id="launchCmd" data-app="cmd.exe">💻 CMD</button>
+              <button class="btn btn-sm" id="launchPowershell" data-app="powershell.exe">⚡ PowerShell</button>
+              <button class="btn btn-sm" id="launchChrome" data-app="chrome.exe">🌐 Chrome</button>
+            </div>
+            
+            <div class="form-group">
+              <label>Ejecutar comando/app:</label>
+              <input type="text" id="customApp" placeholder="path/to/app.exe o comando" />
+              <button class="btn btn-primary" id="launchCustomApp">▶️ Ejecutar</button>
+            </div>
+            
+            <h4>🪟 Window Management</h4>
+            <div class="window-list" id="openWindows">
+              <p class="placeholder-text">Cargando ventanas abiertas...</p>
+            </div>
+          </div>
+
+          <!-- System Info & Resources -->
+          <div class="card glass">
+            <h3>📊 System Resources</h3>
+            <div class="system-resources" id="systemResources">
+              <div class="resource-bar">
+                <span>CPU:</span>
+                <div class="bar"><div class="bar-fill" id="cpuBar" style="width: 0%"></div></div>
+                <span id="cpuPercent">--%</span>
+              </div>
+              <div class="resource-bar">
+                <span>RAM:</span>
+                <div class="bar"><div class="bar-fill" id="ramBar" style="width: 0%"></div></div>
+                <span id="ramPercent">--%</span>
+              </div>
+              <div class="resource-bar">
+                <span>Disk:</span>
+                <div class="bar"><div class="bar-fill" id="diskBar" style="width: 0%"></div></div>
+                <span id="diskPercent">--%</span>
+              </div>
+            </div>
+            <button class="btn btn-secondary" id="refreshResources">🔄 Refresh</button>
+          </div>
+
+          <!-- Action Log -->
+          <div class="card glass">
+            <h3>📜 Action Log</h3>
+            <div class="action-log" id="winworkerLog">
+              <p class="log-entry">[INFO] Windows Worker tab loaded</p>
+            </div>
+            <button class="btn btn-sm btn-secondary" id="clearLog">🗑️ Clear Log</button>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Settings Tab -->
+      <section class="tab-content" id="settingsTab">
+        <div class="section-header">
+          <h2>⚙️ Configuración General</h2>
+        </div>
+        <div class="settings-section glass">
+          <h3>🌐 Acceso Remoto (Tailscale)</h3>
+          <div class="setting-row">
+            <label>Estado Tailscale</label>
+            <div class="setting-value">
+              <span class="status-indicator offline" id="settingsTailscale"></span>
+              <span id="settingsTailscaleText">No conectado</span>
+              <button class="btn btn-sm btn-primary" id="setupTailscale">Configurar</button>
+            </div>
+          </div>
+          <div class="setting-row">
+            <label>URL Remota</label>
+            <input type="text" id="remoteUrl" placeholder="tu-pc.tailnet:8080" readonly />
+          </div>
+        </div>
+        <div class="settings-section glass">
+          <h3>🦞 OpenClaw Config</h3>
+          <div class="setting-row">
+            <label>Gateway Mode</label>
+            <select id="gatewayMode">
+              <option value="local" selected>Local</option>
+              <option value="cloud">Cloud</option>
+            </select>
+          </div>
+          <div class="setting-row">
+            <label>Max Concurrent Agents</label>
+            <input type="number" id="maxConcurrent" value="4" min="1" max="16" />
+          </div>
+          <div class="setting-row">
+            <label>Max Subagents</label>
+            <input type="number" id="maxSubagents" value="8" min="1" max="32" />
+          </div>
+        </div>
+        <div class="settings-section glass">
+          <h3>🔐 Seguridad</h3>
+          <div class="setting-row">
+            <label>Política</label>
+            <select id="securityPolicy">
+              <option value="superultra" selected>SuperUltra (Sin Delete/Move)</option>
+              <option value="strict">Strict</option>
+              <option value="normal">Normal</option>
+            </select>
+          </div>
+          <div class="blocked-tools">
+            <span class="tool-tag blocked">rm</span>
+            <span class="tool-tag blocked">rmdir</span>
+            <span class="tool-tag blocked">delete</span>
+            <span class="tool-tag blocked">move</span>
+          </div>
+        </div>
+        <div class="settings-section glass">
+          <h3>💾 Backup</h3>
+          <div class="setting-row">
+            <label>Último backup</label>
+            <span id="lastBackup">Nunca</span>
+          </div>
+          <div class="setting-row">
+            <label>Ubicación</label>
+            <span>SQLite Local + JSON</span>
+          </div>
+          <button class="btn btn-secondary" id="backupNow">Hacer Backup Ahora</button>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <!-- SECCIÓN 6: CONECTORES EXTERNOS -->
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+
+      <!-- Google Drive Tab -->
+      <section class="tab-content" id="gdriveTab">
+        <div class="section-header">
+          <h2>📁 Google Drive</h2>
+          <span class="hint-inline">Conecta cuentas para almacenar/leer archivos</span>
+        </div>
+        
+        <div class="connectors-grid">
+          <!-- Account 1: diegomanzurn -->
+          <div class="card glass connector-card">
+            <div class="connector-header">
+              <span class="connector-icon">📧</span>
+              <div>
+                <strong>diegomanzurn@gmail.com</strong>
+                <span class="connector-status disconnected" id="gdrive1Status">No conectado</span>
+              </div>
+            </div>
+            <div class="connector-info">
+              <div class="storage-bar">
+                <div class="storage-used" style="width: 90%"></div>
+              </div>
+              <span class="storage-text">~14.5 GB de 15 GB (casi lleno)</span>
+            </div>
+            <div class="connector-actions">
+              <button class="btn btn-primary" id="connectGdrive1">🔗 Conectar OAuth</button>
+              <button class="btn btn-secondary" id="browseGdrive1">📂 Explorar</button>
+            </div>
+          </div>
+          
+          <!-- Account 2: tuyadimn (32TB) -->
+          <div class="card glass connector-card">
+            <div class="connector-header">
+              <span class="connector-icon">☁️</span>
+              <div>
+                <strong>tuyadimn@gmail.com</strong>
+                <span class="connector-status disconnected" id="gdrive2Status">No conectado</span>
+              </div>
+            </div>
+            <div class="connector-info">
+              <div class="storage-bar">
+                <div class="storage-used" style="width: 2%"></div>
+              </div>
+              <span class="storage-text">~640 GB de 32 TB disponible (Principal)</span>
+            </div>
+            <div class="connector-actions">
+              <button class="btn btn-primary" id="connectGdrive2">🔗 Conectar OAuth</button>
+              <button class="btn btn-secondary" id="browseGdrive2">📂 Explorar</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card glass" style="margin-top: 20px;">
+          <h3>⚙️ Configuración de Agentes</h3>
+          <p style="color: var(--text-muted); margin-bottom: 16px;">Asigna permisos de lectura/escritura a los agentes</p>
+          <div class="agent-permissions">
+            <div class="config-row">
+              <label>🎯 Socio</label>
+              <select class="select-styled">
+                <option>Sin acceso</option>
+                <option selected>Lectura + Escritura (tuyadimn)</option>
+                <option>Solo lectura (ambas)</option>
+              </select>
+            </div>
+            <div class="config-row">
+              <label>🧠 Cabezón</label>
+              <select class="select-styled">
+                <option>Sin acceso</option>
+                <option selected>Escritura tuyadimn</option>
+              </select>
+            </div>
+            <div class="config-row">
+              <label>📄 El Fotocopia</label>
+              <select class="select-styled">
+                <option>Sin acceso</option>
+                <option selected>Lectura diegomanzurn + Escritura tuyadimn</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dropbox Tab -->
+      <section class="tab-content" id="dropboxTab">
+        <div class="section-header">
+          <h2>📦 Dropbox</h2>
+        </div>
+        <div class="empty-state glass">
+          <span>📦</span>
+          <p>Dropbox no configurado</p>
+          <button class="btn btn-primary">Conectar Dropbox</button>
+        </div>
+      </section>
+
+      <!-- Notion Tab -->
+      <section class="tab-content" id="notionTab">
+        <div class="section-header">
+          <h2>📓 Notion</h2>
+        </div>
+        <div class="empty-state glass">
+          <span>📓</span>
+          <p>Notion no configurado</p>
+          <button class="btn btn-primary">Conectar Notion API</button>
+        </div>
+      </section>
+
+      <!-- GitHub Tab -->
+      <section class="tab-content" id="githubTab">
+        <div class="section-header">
+          <h2>🐙 GitHub</h2>
+        </div>
+        <div class="empty-state glass">
+          <span>🐙</span>
+          <p>GitHub no configurado</p>
+          <button class="btn btn-primary">Conectar GitHub OAuth</button>
+        </div>
+      </section>
+
+      <!-- Webhooks Tab -->
+      <section class="tab-content" id="webhooksTab">
+        <div class="section-header">
+          <h2>🔗 Webhooks</h2>
+          <button class="btn btn-primary">+ Crear Webhook</button>
+        </div>
+        <div class="card glass">
+          <p style="color: var(--text-muted);">Los webhooks permiten integrar OpenClaw con servicios externos (Zapier, Make, N8N, etc.)</p>
+          <div class="webhooks-list" id="webhooksList">
+            <div class="empty-col">No hay webhooks configurados</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Modals -->
+  <div class="modal" id="agentModal">
+    <div class="modal-content glass">
+      <div class="modal-header">
+        <h3 id="agentModalTitle">🤖 Crear Nuevo Agente</h3>
+        <button class="modal-close" id="closeAgentModal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>ID (único)</label>
+          <input type="text" id="agentId" placeholder="mi_agente" />
+        </div>
+        <div class="form-group">
+          <label>Nombre</label>
+          <input type="text" id="agentName" placeholder="Mi Agente" />
+        </div>
+        <div class="form-group">
+          <label>Emoji</label>
+          <input type="text" id="agentEmoji" placeholder="🔍" maxlength="4" />
+        </div>
+        <div class="form-group">
+          <label>Rol</label>
+          <input type="text" id="agentRole" placeholder="Inspector de Calidad" />
+        </div>
+        <div class="form-group">
+          <label>Modelo</label>
+          <select id="agentModel">
+            <option value="google-antigravity/gemini-3-flash">Gemini 3 Flash</option>
+            <option value="google-antigravity/gemini-3-pro">Gemini 3 Pro</option>
+            <option value="google-antigravity/claude-sonnet-4-5">Claude Sonnet 4.5</option>
+            <option value="google-antigravity/claude-opus-4-5">Claude Opus 4.5</option>
+            <option value="google-antigravity/claude-opus-4-5-thinking">Claude Opus 4.5 Thinking</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Workspace</label>
+          <input type="text" id="agentWorkspace" placeholder="C:\Users\diego\clawd\agents\mi_agente" />
+        </div>
+        
+        <hr style="border-color: var(--border); margin: 20px 0;" />
+        
+        <div class="form-group">
+          <label>📝 System Prompt</label>
+          <textarea id="agentSystemPrompt" rows="6" placeholder="Eres un agente especializado en... Tu objetivo es..."
+            style="width: 100%; resize: vertical; background: var(--glass-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; color: var(--text-primary); font-family: inherit;"></textarea>
+          <small style="color: var(--text-muted);">Este es el prompt que define la personalidad y comportamiento del agente</small>
+        </div>
+        
+        <div class="form-group">
+          <label>📋 Custom Instructions</label>
+          <textarea id="agentInstructions" rows="4" placeholder="Instrucciones adicionales..."
+            style="width: 100%; resize: vertical; background: var(--glass-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; color: var(--text-primary); font-family: inherit;"></textarea>
+        </div>
+        
+        <hr style="border-color: var(--border); margin: 20px 0;" />
+        
+        <div class="form-group">
+          <label>⏰ Horas Activas por Día</label>
+          <div style="display: flex; gap: 12px; align-items: center;">
+            <input type="number" id="agentDailyHours" min="0" max="24" value="8" 
+              style="width: 80px; text-align: center;" />
+            <span style="color: var(--text-muted);">horas/día</span>
+            <select id="agentSchedule" style="flex: 1;">
+              <option value="9-17">Horario Oficina (9:00-17:00)</option>
+              <option value="0-24">24/7 Disponible</option>
+              <option value="6-22">Extended (6:00-22:00)</option>
+              <option value="custom">Personalizado</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>📊 Estado del Agente</label>
+          <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="radio" name="agentStatus" value="active" checked /> 
+              <span style="color: var(--success);">🟢 Activo</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="radio" name="agentStatus" value="paused" /> 
+              <span style="color: var(--warning);">🟡 Pausado</span>
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="radio" name="agentStatus" value="disabled" /> 
+              <span style="color: var(--text-muted);">⚪ Desactivado</span>
+            </label>
+          </div>
+        </div>
+        
+        <div class="form-group" style="background: rgba(var(--accent-rgb), 0.1); padding: 16px; border-radius: var(--radius); margin-top: 16px;">
+          <label>📈 Estadísticas de Actividad</label>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 8px;">
+            <div style="text-align: center;">
+              <div style="font-size: 24px; font-weight: bold; color: var(--accent);" id="agentHoursToday">0h</div>
+              <div style="color: var(--text-muted); font-size: 12px;">Hoy</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="font-size: 24px; font-weight: bold; color: var(--success);" id="agentTasksCompleted">0</div>
+              <div style="color: var(--text-muted); font-size: 12px;">Tareas</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="font-size: 24px; font-weight: bold;" id="agentCompliance" style="color: var(--warning);">-%</div>
+              <div style="color: var(--text-muted); font-size: 12px;">Cumplimiento</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger" id="deleteAgent" style="margin-right: auto;">🗑️ Eliminar</button>
+        <button class="btn btn-secondary" id="cancelAgent">Cancelar</button>
+        <button class="btn btn-primary btn-glow" id="saveAgent">Guardar Agente</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="variableModal">
+    <div class="modal-content glass">
+      <div class="modal-header">
+        <h3>🔐 Nueva Variable</h3>
+        <button class="modal-close" id="closeVariableModal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Nombre</label>
+          <input type="text" id="varName" placeholder="OPENROUTER_API_KEY" />
+        </div>
+        <div class="form-group">
+          <label>Valor</label>
+          <input type="password" id="varValue" placeholder="sk-or-..." />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="cancelVariable">Cancelar</button>
+        <button class="btn btn-primary" id="saveVariable">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}</script>
+</body>
+</html>
