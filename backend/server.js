@@ -162,7 +162,7 @@ cron.schedule('*/40 * * * *', () => {
 // ═══════════════════════════════════════
 // START SERVER
 // ═══════════════════════════════════════
-app.listen(PORT, () => {
-  console.log(`\n🦞 OpenClaw Backend API running on http://localhost:${PORT}\n`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`\n🦞 OpenClaw Backend API running on http://0.0.0.0:${PORT}\n`);
   save(); // Ensure initial data is saved
 });
