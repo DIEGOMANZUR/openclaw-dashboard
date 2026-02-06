@@ -12,8 +12,11 @@ RUN cd backend && npm install
 # Copy all files
 COPY . .
 
+# Railway injects PORT dynamically
+ENV PORT=3001
+
 # Expose port
-EXPOSE 3001
+EXPOSE ${PORT}
 
 # Start the backend server
 CMD ["node", "backend/server.js"]
